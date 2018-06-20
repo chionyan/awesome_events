@@ -19,7 +19,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'rubocop'
+  gem 'rubocop', '0.55.0'
 end
 
 group :development do

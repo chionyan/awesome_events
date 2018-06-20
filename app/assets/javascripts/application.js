@@ -11,5 +11,5 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require_tree .
 //= require bootstrap/dist/js/bootstrap.min.js
+//= require_tree .

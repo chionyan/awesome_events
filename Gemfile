@@ -14,12 +14,14 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop', '0.55.0'
+  gem 'selenium-webdriver'
 end
 
 group :development do

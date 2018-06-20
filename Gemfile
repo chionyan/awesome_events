@@ -20,7 +20,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'rubocop', '0.55.0'
+  gem 'rubocop', '0.55.0', require: false
   gem 'selenium-webdriver'
 end
 

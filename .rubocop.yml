@@ -12,11 +12,17 @@ AllCops:
   CacheRootDirectory: ./tmp
   TargetRubyVersion: 2.5
 
+# rspec の `expect { hoge }` などが対象となり邪魔なので無効にする。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Lint/AmbiguousBlockAssociation
 #
 Lint/AmbiguousBlockAssociation:
   Enabled: false
 
+# true と比較することなんてないし `return unless x = exp` な感じで条件式でも代入したいので無効にする。
+#
+# `AllowSafeAssignment: true` を設定すれば `if (x = 10)` を受け入れてくれる様だけど、読みやすい気がしないしやめておく。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Lint/AssignmentInCondition
 #
 Lint/AssignmentInCondition:
@@ -49,6 +55,8 @@ Metrics/ModuleLength:
 Metrics/CyclomaticComplexity:
   Max: 6
 
+# 128 文字程度にしておく。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Metrics/LineLength
 #
 Metrics/LineLength:
@@ -91,16 +99,22 @@ Metrics/PerceivedComplexity:
 Naming/UncommunicativeMethodParamName:
   MinNameLength: 1
 
+# 主にテストコードで使う連番変数。棚上げするため無効にしておく。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Naming/VariableNumber
 #
 Naming/VariableNumber:
   Enabled: false
 
+# 日本語を使いたいので無効にする。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/AsciiComments
 #
 Style/AsciiComments:
   Enabled: false
 
+# 基本的にブロックコメントは不要だと思うけど、rspec のジェネレータで作ったファイルには含まれている。これだけは許可しておく。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/BlockComments
 #
 Style/BlockComments:
@@ -117,21 +131,29 @@ Style/BracesAroundHashParameters:
     - no_braces
     - context_dependent
 
+# ドキュメンテーションは強制したい気持ちが出てきているけど、歴史的経緯もあるので Rubocop での強制は行わない。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/Documentation
 #
 Style/Documentation:
   Enabled: false
 
+# `!!` は使いたいので無効にする。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/DoubleNegation
 #
 Style/DoubleNegation:
   Enabled: false
 
+# `else` 節で `nil` を返す際は明確に `nil` と書きたいので empty スタイルを採用。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/EmptyElse
 #
 Style/EmptyElse:
   EnforcedStyle: empty
 
+# expanded スタイルにしておく。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/EmptyMethod
 #
 Style/EmptyMethod:
@@ -142,6 +164,8 @@ Style/EmptyMethod:
 Style/ExpandPathArguments:
   Enabled: false
 
+# annotated スタイルが明示的で良さそうな気がしつつ、そこまで書き方を限定すべきか悩んだので unannotated にしておく。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/FormatStringToken
 #
 Style/FormatStringToken:
@@ -166,10 +190,13 @@ Style/SignalException:
 Style/SymbolArray:
   Enabled: false
 
+# 統一するなら brackets スタイルが修正範囲が狭そうだけど、無理に揃えなくても分かりやすいかなと思ったので無効にしておく。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/TernaryParentheses
 #
 Style/TernaryParentheses:
   Enabled: false
+  # EnforcedStyle: brackets
 
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/TrailingCommaInArguments
 #
@@ -189,11 +216,15 @@ Style/TrailingCommaInHashLiteral:
 Rails:
   Enabled: true
 
+# やんごとなき理由から dependent を付けない事があるので無効にしておく。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/HasManyOrHasOneDependent
 #
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 
+# やんごとなき理由からバリデーションを回避することはよくあるので無効にする。
+#
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/SkipsModelValidations
 #
 Rails/SkipsModelValidations:
@@ -204,6 +235,8 @@ Rails/SkipsModelValidations:
 Rails/Validation:
   Enabled: false
 
+# 双方向の関連付けを明示する inverse_of は:throughオプション、:polymorphicオプション、:asオプションとの併用ができないため、アプリの仕様によってつけるかどうかを選択できるよう無効にしておく。
+#
 # @see https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/InverseOf
 # @see https://railsguides.jp/association_basics.html#%E5%8F%8C%E6%96%B9%E5%90%91%E9%96%A2%E9%80%A3%E4%BB%98%E3%81%91
 #

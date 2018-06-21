@@ -7,6 +7,8 @@ gem 'rails', '~> 5.2.0'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
+gem 'omniauth'
+gem 'omniauth-twitter'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'

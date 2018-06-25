@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'WelcomeRequest', type: :request do
   describe 'GET #root' do
-    it 'returns http success' do
-      get '/'
-      expect(response).to have_http_status(:success)
+    it 'HTTP Status 2xx が返ってくること' do
+      get root_path
+      expect(response).to be_successful
     end
   end
 end

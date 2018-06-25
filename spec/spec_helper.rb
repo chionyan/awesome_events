@@ -96,4 +96,18 @@ RSpec.configure do |config|
 
   # 追加設定
   config.order = :random
+
+  # OmniAuth をテストようの挙動に差し替える
+  config.before(:all) do
+    user = build(:user)
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new(
+      provider: user.provider,
+      uid: user.uid,
+      info: {
+        nickname: user.nickname,
+        image: user.image_url,
+      },
+    )
+  end
 end

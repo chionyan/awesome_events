@@ -59,17 +59,4 @@ RSpec.configure do |config|
   #
   # @see https://www.rubydoc.info/github/thoughtbot/factory_bot/FactoryBot/Syntax/Method
   config.include FactoryBot::Syntax::Methods
-
-  config.before(:suite) do
-    user = FactoryBot.build(:user)
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new(
-      provider: user.provider,
-      uid: user.uid,
-      info: {
-        nickname: user.nickname,
-        image: user.image_url,
-      },
-    )
-  end
 end

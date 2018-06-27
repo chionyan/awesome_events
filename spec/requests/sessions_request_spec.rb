@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'SessionsRequest', type: :request do
-  # get '/auth/twitter' の後に コールバックURL が実行されないため、そのままコールバックURL を GET する
+  # get '/auth/twitter' の後にコールバックが実行されないため、直接コールバックURLを GET する
   subject { get '/auth/twitter/callback' }
 
   describe 'GET /auth/twitter/callback' do

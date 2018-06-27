@@ -94,10 +94,8 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 
-  # 追加設定
   config.order = :random
 
-  # OmniAuth をテストようの挙動に差し替える
   config.before(:all) do
     user = build(:user)
     OmniAuth.config.test_mode = true

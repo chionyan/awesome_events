@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     provider 'twitter'
-    uid '12345'
+    sequence(:uid, 12_345, &:to_s)
     nickname 'netwillnet'
     image_url 'http://example.com/netwillnet.jpg'
   end

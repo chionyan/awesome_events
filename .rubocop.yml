@@ -176,6 +176,12 @@ Style/FormatStringToken:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+# 1_000_000 と区切り文字が 2 個以上必要になる場合のみ _ 区切りを必須にする
+#
+# @see https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/NumericLiterals
+Style/NumericLiterals:
+  MinDigits: 7
+
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/RescueStandardError
 #
 Style/RescueStandardError:
@@ -209,6 +215,13 @@ Style/TrailingCommaInArrayLiteral:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
+
+# Factory_bot の sequence を使う際に、ダブルコーテーションに変数を入れると検査されるため
+
+# @see https://www.rubydoc.info/github/bbatsov/RuboCop/RuboCop/Cop/Style/UnneededInterpolation
+Style/UnneededInterpolation:
+  Exclude:
+    - 'spec/factories/*'
 
 ##################### Rails ##################################
 

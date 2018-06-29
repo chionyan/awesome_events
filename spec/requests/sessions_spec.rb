@@ -13,10 +13,10 @@ RSpec.describe 'SessionsRequest', type: :request do
     )
   end
 
-  # get '/auth/twitter' の後にコールバックが実行されないため、直接コールバックURLを GET する
-  subject { get '/auth/twitter/callback' }
-
   describe 'GET /auth/twitter/callback' do
+    # get '/auth/twitter' の後にコールバックが実行されないため、直接コールバックURLを GET する
+    subject { get '/auth/twitter/callback' }
+
     context 'ユーザが未登録の場合' do
       let(:user) { build(:user) }
 
@@ -51,6 +51,21 @@ RSpec.describe 'SessionsRequest', type: :request do
         subject
         expect(response).to be_redirect
       end
+    end
+  end
+
+  describe 'GET /logout' do
+    subject { get '/logout' }
+    let!(:user) { build(:user) }
+
+    it 'session の user_id が nil になっているいること' do
+      subject
+      expect(session[:user_id]).to be_nil
+    end
+
+    it 'HTTP Status 3xx が返ってくること' do
+      subject
+      expect(response).to be_redirect
     end
   end
 end

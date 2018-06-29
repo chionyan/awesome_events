@@ -36,7 +36,7 @@ RSpec.describe 'SessionsRequest', type: :request do
     end
 
     context 'ユーザが登録済の場合' do
-      let(:user) { create(:user) }
+      let!(:user) { create(:user) }
 
       it 'ユーザが作成されないこと' do
         expect { subject }.not_to change(User, :count)

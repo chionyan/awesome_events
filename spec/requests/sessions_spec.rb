@@ -13,7 +13,7 @@ RSpec.describe 'SessionsRequest', type: :request do
     )
   end
 
-  describe 'GET /auth/twitter/callback' do
+  describe 'GET #create' do
     # get '/auth/twitter' の後にコールバックが実行されないため、直接コールバックURLを GET する
     subject { get '/auth/twitter/callback' }
 
@@ -54,7 +54,7 @@ RSpec.describe 'SessionsRequest', type: :request do
     end
   end
 
-  describe 'GET /logout' do
+  describe 'GET #destroy' do
     subject { get '/logout' }
     let!(:user) { build(:user) }
 

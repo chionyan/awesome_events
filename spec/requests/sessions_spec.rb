@@ -1,17 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'SessionsRequest', type: :request do
-  before do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new(
-      provider: user.provider,
-      uid: user.uid,
-      info: {
-        nickname: user.nickname,
-        image: user.image_url,
-      },
-    )
-  end
+  before { OmniAuth.config.mock_auth[:twitter] = log_in_as user }
 
   describe 'GET #create' do
     # get '/auth/twitter' の後にコールバックが実行されないため、直接コールバックURLを GET する

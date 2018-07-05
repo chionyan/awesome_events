@@ -25,6 +25,9 @@
         <div class="collapse navbar-collapse" id="Navber">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+              <%= link_to 'イベントを作る', new_event_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
               <% if logged_in? %>
               <%= link_to 'ログアウト', logout_path, class: 'nav-link' %>
               <% else %>
@@ -40,6 +43,11 @@
       <% if flash[:notice] %>
       <div class="alert alert-success">
         <%= flash[:notice] %>
+      </div>
+      <% end %>
+      <% if flash[:alert] %>
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
       </div>
       <% end %>
       <%= yield %>

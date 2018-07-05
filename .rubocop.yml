@@ -228,6 +228,13 @@ Style/UnneededInterpolation:
 Rails:
   Enabled: true
 
+# デフォルトで記述されているパスも指摘されるため無効
+# 
+# @see https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/FilePath
+Rails/FilePath:
+  Exclude:
+    - 'spec/*_helper.rb'
+
 # やんごとなき理由から dependent を付けない事があるので無効にしておく。
 #
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/HasManyOrHasOneDependent

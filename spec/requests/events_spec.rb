@@ -17,10 +17,6 @@ RSpec.describe 'Events', type: :request do
         expect(response).to be_successful
       end
 
-      it 'Event のインスタンスが作成されていること' do
-        expect(assigns(:event)).to be_a_new(Event)
-      end
-
       it ':newテンプレートを表示すること' do
         expect(response).to render_template :new
       end

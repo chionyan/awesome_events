@@ -57,7 +57,7 @@ RSpec.describe 'Events', type: :request do
 
       it ':show にリダイレクトすること' do
         subject
-        expect(response).to redirect_to(Event.last)
+        expect(response).to redirect_to(Event.order(created_at: :desc).first)
       end
     end
 

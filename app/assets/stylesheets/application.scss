@@ -16,13 +16,13 @@
 
  @import "bootstrap/dist/css/bootstrap.min.css";
 
- .bootstrap-page-header {
-  padding-bottom: .5rem!important;
-  margin-top: 1.5rem!important;
-  margin-bottom: .5rem!important;
- }
-
  .bootstrap-date {
   display: inline-block;
   width: auto;
+ }
+
+ .display-4 {
+  padding-bottom: .5rem;
+  margin-top: 1.5rem;
+  margin-bottom: .5rem;
  }

@@ -8,7 +8,7 @@ RSpec.describe 'Events', type: :request do
 
     let(:user) { build(:user) }
 
-    context 'ログイン時' do
+    context 'ユーザがログインしている場合' do
       before { get '/auth/twitter/callback' }
 
       it 'HTTP Status 2xx が返ってくること' do
@@ -22,7 +22,7 @@ RSpec.describe 'Events', type: :request do
       end
     end
 
-    context '未ログイン時' do
+    context 'ユーザがログインしていない場合' do
       it 'HTTP Status 3xx が返ってくること' do
         subject
         expect(response).to be_redirect
@@ -43,7 +43,7 @@ RSpec.describe 'Events', type: :request do
 
     before { get '/auth/twitter/callback' }
 
-    context '有効なパラメータの場合' do
+    context 'params が有効なパラメータの場合' do
       let(:params) { { event: attributes_for(:event) } }
 
       it 'HTTP Status 3xx が返ってくること' do
@@ -61,7 +61,7 @@ RSpec.describe 'Events', type: :request do
       end
     end
 
-    context '無効なパラメータの場合' do
+    context 'params が無効なパラメータの場合' do
       let(:params) { { event: attributes_for(:event, name: nil) } }
 
       it 'HTTP Status 2xx が返ってくること' do

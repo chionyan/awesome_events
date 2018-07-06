@@ -13,7 +13,7 @@ RSpec.describe 'EventsSystem', type: :system do
     expect(page).to have_content 'イベントを作る'
   end
 
-  context 'ログイン時' do
+  context 'ユーザがログインしている場合' do
     before do
       click_link 'Twitterでログイン'
       visit new_event_path
@@ -23,7 +23,7 @@ RSpec.describe 'EventsSystem', type: :system do
       expect(page.current_path).to eq '/events/new'
     end
 
-    context '有効なパラメータを入力した場合' do
+    context 'フォームに有効なパラメータを入力した場合' do
       subject { click_button '作成' }
 
       before do
@@ -53,7 +53,7 @@ RSpec.describe 'EventsSystem', type: :system do
       end
     end
 
-    context '無効なパラメータを入力した場合' do
+    context 'フォームに無効なパラメータを入力した場合' do
       subject { click_button '作成' }
 
       context '名前が空の場合' do
@@ -100,7 +100,7 @@ RSpec.describe 'EventsSystem', type: :system do
     end
   end
 
-  context '未ログイン時' do
+  context 'ユーザがログインしていない場合' do
     before { visit new_event_path }
 
     it 'トップページが表示されること' do

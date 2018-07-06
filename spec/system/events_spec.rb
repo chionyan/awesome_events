@@ -6,7 +6,7 @@ RSpec.describe 'EventsSystem', type: :system do
     visit root_path
   end
 
-  let!(:user) { build(:user) }
+  let(:user) { build(:user) }
   let!(:event) { build(:event) }
 
   it '"イベントを作る"リンクが表示されていること' do
@@ -100,10 +100,8 @@ RSpec.describe 'EventsSystem', type: :system do
     end
   end
 
-  context 'ログアウト時' do
-    before do
-      visit new_event_path
-    end
+  context '未ログイン時' do
+    before { visit new_event_path }
 
     it 'トップページが表示されること' do
       expect(page.current_path).to eq '/'

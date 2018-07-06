@@ -5,7 +5,7 @@ RSpec.describe 'SessionsSystem', type: :system do
 
   let(:user) { build(:user) }
 
-  context 'ログアウト時' do
+  context '未ログイン時' do
     before { visit root_path }
 
     it '"Twitterでログイン"リンクが表示されること' do

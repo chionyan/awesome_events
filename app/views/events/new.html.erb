@@ -1,1 +1,46 @@
-<h1>Event#new</h1>
+<% now = Time.zone.now %>
+
+<h1 class="display-4">イベント作成</h1>
+
+<%= form_with model: @event, local: true do |f| %>
+  <% if @event.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :place %>
+    <%= f.text_field :place, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :start_time %>
+    <div>
+      <%= f.datetime_select :start_time, { start_year: now.year, end_year: now.year + 1 }, { class: 'form-control bootstrap-date' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end_time %>
+    <div>
+      <%= f.datetime_select :end_time, { start_year: now.year, end_year: now.year + 1 }, { class: 'form-control bootstrap-date' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control', row: 10 %>
+  </div>
+
+  <%= f.submit '作成', class: 'btn btn-secondary', data: { disable_with: '作成中…' } %>
+<% end %>

@@ -77,11 +77,6 @@ RSpec.describe 'Events', type: :request do
         subject
         expect(response).to render_template :new
       end
-
-      it 'エラーメッセージを表示すること' do
-        subject
-        expect(response.body).to include '<div class="alert alert-danger">'
-      end
     end
   end
 end

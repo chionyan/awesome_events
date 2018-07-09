@@ -79,4 +79,16 @@ RSpec.describe 'Events', type: :request do
       end
     end
   end
+
+  describe 'GET #show' do
+    subject { get event_path(event.id) }
+
+    let(:user) { event.owner }
+    let(:event) { create(:event) }
+
+    it 'HTTP Status 2xx が返ってくること' do
+      subject
+      expect(response).to be_successful
+    end
+  end
 end

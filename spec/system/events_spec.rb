@@ -13,6 +13,20 @@ RSpec.describe 'EventsSystem', type: :system do
     expect(page).to have_content 'イベントを作る'
   end
 
+  context 'イベント詳細ページにアクセスした場合' do
+    subject { visit event_path(event.id) }
+    let(:event) { create(:event) }
+
+    it 'イベント詳細ページが表示されること' do
+      subject
+      expect(page).to have_content event.name
+      expect(page).to have_content event.place
+      expect(page).to have_content event.content
+      expect(page).to have_content event.content
+      expect(page).to have_content "#{event.start_time.strftime('%Y/%m/%d %H:%M')} - #{event.end_time.strftime('%Y/%m/%d %H:%M')}"
+    end
+  end
+
   context 'ユーザがログインしている場合' do
     before do
       click_link 'Twitterでログイン'
@@ -44,7 +58,11 @@ RSpec.describe 'EventsSystem', type: :system do
 
       it 'イベント詳細ページが表示されること' do
         subject
-        expect(page.current_path).to eq "/events/#{Event.last.id}"
+        expect(page).to have_content event.name
+        expect(page).to have_content event.place
+        expect(page).to have_content event.content
+        expect(page).to have_content event.content
+        expect(page).to have_content "#{event.start_time.strftime('%Y/%m/%d %H:%M')} - #{event.end_time.strftime('%Y/%m/%d %H:%M')}"
       end
 
       it '"作成しました"メッセージが表示されること' do

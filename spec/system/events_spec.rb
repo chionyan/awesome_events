@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe 'EventsSystem', type: :system do
   before do
     OmniAuth.config.mock_auth[:twitter] = log_in_as user
+    travel_to event.start_time
     visit root_path
   end
 
   let(:user) { build(:user) }
-  let!(:event) { build(:event) }
+  let(:event) { build(:event) }
 
   it '"イベントを作る"リンクが表示されていること' do
     expect(page).to have_content 'イベントを作る'

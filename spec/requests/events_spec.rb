@@ -38,7 +38,7 @@ RSpec.describe 'Events', type: :request do
   describe 'POST #create' do
     subject { post events_path, params: params }
 
-    let(:user) { build(:user) }
+    let(:user) { event.owner }
     let!(:event) { build(:event) }
 
     before { get '/auth/twitter/callback' }

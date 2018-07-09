@@ -74,4 +74,10 @@ RSpec.configure do |config|
   #
   # @see https://www.rubydoc.info/github/thoughtbot/factory_bot/FactoryBot/Syntax/Method
   config.include FactoryBot::Syntax::Methods
+
+  # now の スタブで #travel_to の値を使用する
+  #
+  # @see http://api.rubyonrails.org/classes/ActiveSupport/Testing/TimeHelpers.html#method-i-travel_to
+  config.include ActiveSupport::Testing::TimeHelpers
+  config.after { travel_back }
 end

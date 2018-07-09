@@ -9,7 +9,7 @@ RSpec.describe 'EventsSystem', type: :system do
 
   let(:user) { build(:user) }
   let(:event) { build(:event) }
-  let(:event_open_time) { "#{event.start_time.strftime('%Y/%m/%d %H:%M')} - #{event.end_time.strftime('%Y/%m/%d %H:%M')}" }
+  let(:event_holding_time) { "#{event.start_time.strftime('%Y/%m/%d %H:%M')} - #{event.end_time.strftime('%Y/%m/%d %H:%M')}" }
 
   it '"イベントを作る"リンクが表示されていること' do
     expect(page).to have_content 'イベントを作る'
@@ -24,7 +24,7 @@ RSpec.describe 'EventsSystem', type: :system do
       expect(page).to have_content event.name
       expect(page).to have_content event.place
       expect(page).to have_content event.content
-      expect(page).to have_content event_open_time
+      expect(page).to have_content event_holding_time
     end
   end
 
@@ -62,7 +62,7 @@ RSpec.describe 'EventsSystem', type: :system do
         expect(page).to have_content event.name
         expect(page).to have_content event.place
         expect(page).to have_content event.content
-        expect(page).to have_content event_open_time
+        expect(page).to have_content event_holding_time
       end
 
       it '"作成しました"メッセージが表示されること' do

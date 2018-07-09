@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :event do
-    owner { build(:user) }
+    owner
     name 'TEST_EVENT_NAME'
     place 'TEST_EVENT_PLACE'
     content 'TEST_EVENT_CONTENT'

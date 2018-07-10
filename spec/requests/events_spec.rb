@@ -90,5 +90,10 @@ RSpec.describe 'Events', type: :request do
       subject
       expect(response).to be_successful
     end
+
+    it ':showテンプレートを表示すること' do
+      subject
+      expect(response).to render_template :show
+    end
   end
 end

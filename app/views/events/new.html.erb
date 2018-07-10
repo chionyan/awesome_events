@@ -6,7 +6,7 @@
 
 <%= form_with model: @event, local: true do |f| %>
   <% if @event.errors.any? %>
-  <div class="alert alert-danger">
+  <div class="alert alert-danger mt-4 mb-2 pb-2">
     <ul>
       <% @event.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>

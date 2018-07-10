@@ -26,26 +26,6 @@ RSpec.describe 'SessionsSystem', type: :system do
         end
       end
     end
-
-    context 'ユーザがログインしている時' do
-      before { click_link 'Twitterでログイン' }
-
-      it '"ログアウト"リンクが表示されること' do
-        expect(page).to have_content 'ログアウト'
-      end
-
-      context '"ログアウト"をクリックした時' do
-        before { click_link 'ログアウト' }
-
-        it 'トップページが表示されること' do
-          expect(page.current_path).to eq root_path
-        end
-
-        it 'ログアウトしましたと表示されること' do
-          expect(page).to have_content 'ログアウトしました'
-        end
-      end
-    end
   end
 
   context 'ユーザが登録済の場合' do

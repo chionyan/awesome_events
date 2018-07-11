@@ -6,7 +6,7 @@ RSpec.describe 'Events', type: :request do
   describe 'GET #new' do
     subject { get new_event_path }
 
-    let(:user) { build(:user) }
+    let(:user) { create(:user) }
 
     context 'ユーザがログインしている場合' do
       before { get '/auth/twitter/callback' }
@@ -38,7 +38,7 @@ RSpec.describe 'Events', type: :request do
   describe 'POST #create' do
     subject { post events_path, params: params }
 
-    let(:user) { build(:user) }
+    let(:user) { create(:user) }
     let(:event) { build(:event, owner: user) }
 
     before { get '/auth/twitter/callback' }
@@ -83,12 +83,17 @@ RSpec.describe 'Events', type: :request do
   describe 'GET #show' do
     subject { get event_path(event.id) }
 
-    let(:user) { build(:user) }
+    let(:user) { create(:user) }
     let(:event) { create(:event, owner: user) }
 
     it 'HTTP Status 2xx が返ってくること' do
       subject
       expect(response).to be_successful
+    end
+
+    it ':showテンプレートを表示すること' do
+      subject
+      expect(response).to render_template :show
     end
   end
 end

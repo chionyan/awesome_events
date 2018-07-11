@@ -22,7 +22,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="Navber">
+        <div class="collapse navbar-collapse" id="Navbar">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <%= link_to 'イベントを作る', new_event_path, class: 'nav-link' %>
@@ -41,12 +41,12 @@
 
     <div class="container">
       <% if flash[:notice] %>
-      <div class="alert alert-success">
+      <div class="alert alert-success mt-4 mb-2 pb-2">
         <%= flash[:notice] %>
       </div>
       <% end %>
       <% if flash[:alert] %>
-      <div class="alert alert-danger">
+      <div class="alert alert-danger mt-4 mb-2 pb-2">
         <%= flash[:alert] %>
       </div>
       <% end %>

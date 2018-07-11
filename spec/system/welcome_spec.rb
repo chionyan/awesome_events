@@ -1,8 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'WelcomeSystem', type: :system do
-  it 'トップページにアクセスできること' do
-    visit '/'
-    expect(page).to have_content 'Welcome#index'
+  context 'イベント詳細ページにアクセスした時' do
+    before { visit root_path }
+
+    it '"イベントを作る"リンクが表示されていること' do
+      expect(page).to have_content 'イベントを作る'
+    end
   end
 end

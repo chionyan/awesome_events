@@ -1,12 +1,12 @@
 <% now = Time.zone.now %>
 
-<div class="display-4">
+<div class="display-4 mt-4 mb-2 pb-2">
   <h1>イベント作成</h1>
 </div>
 
 <%= form_with model: @event, local: true do |f| %>
   <% if @event.errors.any? %>
-  <div class="alert alert-danger">
+  <div class="alert alert-danger mt-4 mb-2 pb-2">
     <ul>
       <% @event.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>

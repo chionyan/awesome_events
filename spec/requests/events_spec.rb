@@ -84,7 +84,7 @@ RSpec.describe 'Events', type: :request do
     subject { get event_path(event.id) }
 
     let(:user) { create(:user) }
-    let(:event) { create(:event, owner: user) }
+    let!(:event) { create(:event, owner: user) }
 
     it 'HTTP Status 2xx が返ってくること' do
       subject
@@ -101,7 +101,7 @@ RSpec.describe 'Events', type: :request do
     subject { get events_path }
 
     let(:user) { create(:user) }
-    let(:event) { create(:event, owner: user) }
+    let!(:event) { create(:event, owner: user) }
 
     it 'HTTP Status 2xx が返ってくること' do
       subject

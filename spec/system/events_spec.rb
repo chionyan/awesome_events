@@ -26,7 +26,7 @@ RSpec.describe 'EventsSystem', type: :system do
 
     context 'イベント詳細ページにアクセスした時' do
       before { visit event_path(event.id) }
-      let(:event) { create(:event) }
+      let!(:event) { create(:event) }
 
       it 'イベント詳細ページが表示されること' do
         expect(page).to have_content event.name
@@ -38,7 +38,7 @@ RSpec.describe 'EventsSystem', type: :system do
 
     context 'イベント一覧ページにアクセスした場合' do
       subject { visit events_path }
-      let(:event) { create(:event) }
+      let!(:event) { create(:event) }
 
       before do
         create(:event, name: 'future_event_1', start_time: Time.zone.now + 1.hour)
@@ -147,7 +147,7 @@ RSpec.describe 'EventsSystem', type: :system do
 
     context 'イベント詳細ページにアクセスした時' do
       subject { visit event_path(event.id) }
-      let(:event) { create(:event) }
+      let!(:event) { create(:event) }
 
       it 'イベント詳細ページが表示されること' do
         subject
@@ -160,7 +160,7 @@ RSpec.describe 'EventsSystem', type: :system do
 
     context 'イベント一覧ページにアクセスした場合' do
       subject { visit events_path }
-      let(:event) { create(:event) }
+      let!(:event) { create(:event) }
 
       before do
         create(:event, name: 'future_event_1', start_time: Time.zone.now + 1.hour)

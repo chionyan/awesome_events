@@ -35,6 +35,30 @@ RSpec.describe 'EventsSystem', type: :system do
         expect(page).to have_content event_holding_time
       end
     end
+
+    context 'イベント一覧ページにアクセスした場合' do
+      subject { visit events_path }
+      let(:event) { create(:event) }
+
+      before do
+        create(:event, name: 'future_event_1', start_time: Time.zone.now + 1.hour)
+        create(:event, name: 'future_event_2', start_time: Time.zone.now + 1.hour)
+      end
+
+      it '未開催のイベント一覧が表示されること' do
+        subject
+        expect(page).to have_content 'future_event_1'
+        expect(page).to have_content 'future_event_2'
+        expect(page).to_not have_content event.name
+      end
+
+      it '開始時間順でイベント一覧が表示されること' do
+        subject
+        list_group_item = page.all('.list-group-item')
+        expect(list_group_item[0].find('h4').text).to eq 'future_event_1'
+        expect(list_group_item[1].find('h4').text).to eq 'future_event_2'
+      end
+    end
   end
 
   context 'ユーザがログインしている時' do
@@ -119,17 +143,42 @@ RSpec.describe 'EventsSystem', type: :system do
           end
         end
       end
+    end
 
-      context 'イベント詳細ページにアクセスした時' do
-        before { visit event_path(event.id) }
-        let(:event) { create(:event) }
+    context 'イベント詳細ページにアクセスした時' do
+      subject { visit event_path(event.id) }
+      let(:event) { create(:event) }
 
-        it 'イベント詳細ページが表示されること' do
-          expect(page).to have_content event.name
-          expect(page).to have_content event.place
-          expect(page).to have_content event.content
-          expect(page).to have_content event_holding_time
-        end
+      it 'イベント詳細ページが表示されること' do
+        subject
+        expect(page).to have_content event.name
+        expect(page).to have_content event.place
+        expect(page).to have_content event.content
+        expect(page).to have_content event_holding_time
+      end
+    end
+
+    context 'イベント一覧ページにアクセスした場合' do
+      subject { visit events_path }
+      let(:event) { create(:event) }
+
+      before do
+        create(:event, name: 'future_event_1', start_time: Time.zone.now + 1.hour)
+        create(:event, name: 'future_event_2', start_time: Time.zone.now + 2.hours)
+      end
+
+      it '未開催のイベント一覧が表示されること' do
+        subject
+        expect(page).to have_content 'future_event_1'
+        expect(page).to have_content 'future_event_2'
+        expect(page).to_not have_content event.name
+      end
+
+      it '開始時間順でイベント一覧が表示されること' do
+        subject
+        list_group_item = page.all('.list-group-item')
+        expect(list_group_item[0].find('h4').text).to eq 'future_event_1'
+        expect(list_group_item[1].find('h4').text).to eq 'future_event_2'
       end
     end
   end

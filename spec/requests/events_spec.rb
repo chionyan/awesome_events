@@ -146,4 +146,54 @@ RSpec.describe 'Events', type: :request do
       end
     end
   end
+
+  describe 'PATCH #update' do
+    subject do
+      patch event_path(event.id), params: params
+      event.reload
+    end
+
+    let(:user) { create(:user) }
+    let(:event) { create(:event, owner: user) }
+
+    before { get '/auth/twitter/callback' }
+
+    context 'params が有効なパラメータの場合' do
+      let(:params) { { event: attributes_for(:event, name: 'UPDATE_TEST') } }
+
+      it 'HTTP Status 3xx が返ってくること' do
+        subject
+        expect(response).to be_redirect
+      end
+
+      it 'イベントを更新すること' do
+        subject
+        expect(event.name).to eq 'UPDATE_TEST'
+      end
+
+      it ':show にリダイレクトすること' do
+        subject
+        expect(response).to redirect_to(event)
+      end
+    end
+
+    context 'params が無効なパラメータの場合' do
+      let(:params) { { event: attributes_for(:event, name: nil) } }
+
+      it 'HTTP Status 2xx が返ってくること' do
+        subject
+        expect(response).to be_successful
+      end
+
+      it 'イベントが更新されないこと' do
+        subject
+        expect(event.name).to eq 'TEST_EVENT_NAME'
+      end
+
+      it ':editテンプレートを再表示すること' do
+        subject
+        expect(response).to render_template :edit
+      end
+    end
+  end
 end

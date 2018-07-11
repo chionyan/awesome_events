@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate, except: :show
+  before_action :authenticate, except: [:show, :index]
 
   def new
     @event = current_user.created_events.build
@@ -16,6 +16,10 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+  end
+
+  def index
+    @events = Event.where('start_time > ?', Time.zone.now).order(:start_time)
   end
 
   private

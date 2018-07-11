@@ -1,0 +1,16 @@
+<div class="display-4 mt-4 mb-2 pb-2">
+  <h1>イベント一覧</h1>
+</div>
+
+<ul class="list-group">
+  <% @events.each do |event| %>
+  <%= link_to(event, class: 'list-group-item') do %>
+    <h4 class="my-auto">
+      <%= event.name %>
+    </h4>
+    <p class="my-auto">
+      <%= event.start_time.strftime('%Y/%m/%d %H:%M') %> - <%= event.end_time.strftime('%Y/%m/%d %H:%M') %>
+    </p>
+  <% end %>
+  <% end %>
+</ul>

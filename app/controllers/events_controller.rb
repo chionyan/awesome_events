@@ -22,6 +22,10 @@ class EventsController < ApplicationController
     @events = Event.where('start_time > ?', Time.zone.now).order(:start_time)
   end
 
+  def edit
+    @event = current_user.created_events.find(params[:id])
+  end
+
   private
 
   def event_params

@@ -113,4 +113,37 @@ RSpec.describe 'Events', type: :request do
       expect(response).to render_template :index
     end
   end
+
+  describe 'GET #edit' do
+    subject { get edit_event_path(event.id) }
+
+    let(:user) { create(:user) }
+    let(:event) { create(:event, owner: user) }
+
+    context 'ユーザがログインしている場合' do
+      before { get '/auth/twitter/callback' }
+
+      it 'HTTP Status 2xx が返ってくること' do
+        subject
+        expect(response).to be_successful
+      end
+
+      it ':editテンプレートを表示すること' do
+        subject
+        expect(response).to render_template :edit
+      end
+    end
+
+    context 'ユーザがログインしていない場合' do
+      it 'HTTP Status 3xx が返ってくること' do
+        subject
+        expect(response).to be_redirect
+      end
+
+      it 'トップページにリダイレクトすること' do
+        subject
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
 end

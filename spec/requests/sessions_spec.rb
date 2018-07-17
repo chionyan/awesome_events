@@ -19,9 +19,8 @@ RSpec.describe 'SessionsRequest', type: :request do
         expect(session[:user_id]).to be_present
       end
 
-      it 'HTTP Status 3xx が返り、トップページにリダイレクトすること' do
+      it 'トップページにリダイレクトすること' do
         subject
-        expect(response).to be_redirect
         expect(response).to redirect_to(root_path)
       end
     end
@@ -38,9 +37,8 @@ RSpec.describe 'SessionsRequest', type: :request do
         expect(session[:user_id]).to be_present
       end
 
-      it 'HTTP Status 3xx が返り、トップページにリダイレクトすること' do
+      it 'トップページにリダイレクトすること' do
         subject
-        expect(response).to be_redirect
         expect(response).to redirect_to(root_path)
       end
     end
@@ -55,9 +53,9 @@ RSpec.describe 'SessionsRequest', type: :request do
       expect(session[:user_id]).to be_nil
     end
 
-    it 'HTTP Status 3xx が返ってくること' do
+    it 'トップページにリダイレクトすること' do
       subject
-      expect(response).to be_redirect
+      expect(response).to redirect_to(root_path)
     end
   end
 end

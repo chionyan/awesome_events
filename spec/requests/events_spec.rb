@@ -23,9 +23,8 @@ RSpec.describe 'Events', type: :request do
     end
 
     context 'ユーザがログインしていない場合' do
-      it 'HTTP Status 3xx が返り、トップページにリダイレクトすること' do
+      it 'トップページにリダイレクトすること' do
         subject
-        expect(response).to be_redirect
         expect(response).to redirect_to(root_path)
       end
     end
@@ -42,9 +41,8 @@ RSpec.describe 'Events', type: :request do
     context 'params が有効なパラメータの場合' do
       let(:params) { { event: attributes_for(:event) } }
 
-      it 'HTTP Status 3xx が返り、 :show にリダイレクトすること' do
+      it ':show にリダイレクトすること' do
         subject
-        expect(response).to be_redirect
         expect(response).to redirect_to(Event.order(:created_at).last)
       end
 
@@ -127,9 +125,8 @@ RSpec.describe 'Events', type: :request do
     end
 
     context 'ユーザがログインしていない場合' do
-      it 'HTTP Status 3xx が返り、トップページにリダイレクトすること' do
+      it 'トップページにリダイレクトすること' do
         subject
-        expect(response).to be_redirect
         expect(response).to redirect_to(root_path)
       end
     end
@@ -149,9 +146,8 @@ RSpec.describe 'Events', type: :request do
     context 'params が有効なパラメータの場合' do
       let(:params) { { event: attributes_for(:event, name: 'UPDATE_TEST') } }
 
-      it 'HTTP Status 3xx が返り、 :show にリダイレクトすること' do
+      it ':show にリダイレクトすること' do
         subject
-        expect(response).to be_redirect
         expect(response).to redirect_to(event)
       end
 

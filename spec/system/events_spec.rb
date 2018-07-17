@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe 'EventsSystem', type: :system do
   include_context 'with_log_in'
 
-  let!(:ja_name) { I18n.t('activerecord.attributes.event.name') }
-  let!(:ja_place) { I18n.t('activerecord.attributes.event.place') }
-  let!(:ja_content) { I18n.t('activerecord.attributes.event.content') }
-  let!(:ja_error_messages_blank) { I18n.t('errors.messages.blank') }
+  ja_name = I18n.t('activerecord.attributes.event.name')
+  ja_place = I18n.t('activerecord.attributes.event.place')
+  ja_content = I18n.t('activerecord.attributes.event.content')
+  ja_error_messages_blank = I18n.t('errors.messages.blank')
 
   before { travel_to '2018-07-07 18:30:00' }
 

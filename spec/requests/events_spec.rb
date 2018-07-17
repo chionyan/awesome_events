@@ -23,13 +23,9 @@ RSpec.describe 'Events', type: :request do
     end
 
     context 'ユーザがログインしていない場合' do
-      it 'HTTP Status 3xx が返ってくること' do
+      it 'HTTP Status 3xx が返り、トップページにリダイレクトすること' do
         subject
         expect(response).to be_redirect
-      end
-
-      it 'トップページにリダイレクトすること' do
-        subject
         expect(response).to redirect_to(root_path)
       end
     end
@@ -46,18 +42,14 @@ RSpec.describe 'Events', type: :request do
     context 'params が有効なパラメータの場合' do
       let(:params) { { event: attributes_for(:event) } }
 
-      it 'HTTP Status 3xx が返ってくること' do
+      it 'HTTP Status 3xx が返り、 :show にリダイレクトすること' do
         subject
         expect(response).to be_redirect
+        expect(response).to redirect_to(Event.order(:created_at).last)
       end
 
       it 'イベントを新規作成すること' do
         expect { subject }.to change(Event, :count).by(1)
-      end
-
-      it ':show にリダイレクトすること' do
-        subject
-        expect(response).to redirect_to(Event.order(:created_at).last)
       end
     end
 
@@ -135,13 +127,9 @@ RSpec.describe 'Events', type: :request do
     end
 
     context 'ユーザがログインしていない場合' do
-      it 'HTTP Status 3xx が返ってくること' do
+      it 'HTTP Status 3xx が返り、トップページにリダイレクトすること' do
         subject
         expect(response).to be_redirect
-      end
-
-      it 'トップページにリダイレクトすること' do
-        subject
         expect(response).to redirect_to(root_path)
       end
     end
@@ -161,19 +149,15 @@ RSpec.describe 'Events', type: :request do
     context 'params が有効なパラメータの場合' do
       let(:params) { { event: attributes_for(:event, name: 'UPDATE_TEST') } }
 
-      it 'HTTP Status 3xx が返ってくること' do
+      it 'HTTP Status 3xx が返り、 :show にリダイレクトすること' do
         subject
         expect(response).to be_redirect
+        expect(response).to redirect_to(event)
       end
 
       it 'イベントを更新すること' do
         subject
         expect(event.name).to eq 'UPDATE_TEST'
-      end
-
-      it ':show にリダイレクトすること' do
-        subject
-        expect(response).to redirect_to(event)
       end
     end
 

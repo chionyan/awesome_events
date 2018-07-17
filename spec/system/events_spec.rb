@@ -19,9 +19,9 @@ RSpec.describe 'EventsSystem', type: :system do
 
     context '無効な値を入力後、"作成"ボタンをクリックした場合' do
       before do
-        fill_in_text 'event_name', ''
-        fill_in_text 'event_place', ''
-        fill_in_text 'event_content', ''
+        fill_in 'event_name', with: ''
+        fill_in 'event_place', with: ''
+        fill_in 'event_content', with: ''
         click_button '作成'
       end
 
@@ -37,9 +37,9 @@ RSpec.describe 'EventsSystem', type: :system do
       let!(:event) { build(:event) }
 
       before do
-        fill_in_text 'event_name', event.name
-        fill_in_text 'event_place', event.place
-        fill_in_text 'event_content', event.content
+        fill_in 'event_name', with: event.name
+        fill_in 'event_place', with: event.place
+        fill_in 'event_content', with: event.content
         select_datetime 'event_start_time', event.start_time
         select_datetime 'event_end_time', event.end_time
         click_button '作成'
@@ -80,7 +80,7 @@ RSpec.describe 'EventsSystem', type: :system do
 
     describe '名前を編集後、"更新"ボタンをクリックした時' do
       before do
-        fill_in_text 'event_name', "#{event.name}_edit"
+        fill_in 'event_name', with: "#{event.name}_edit"
         click_button '更新'
       end
 

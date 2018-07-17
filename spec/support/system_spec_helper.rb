@@ -1,8 +1,4 @@
 module SystemSpecHelper
-  def fill_in_text(id_name, content)
-    fill_in id_name, with: content
-  end
-
   def select_datetime(id_name, datetime)
     select datetime.year.to_s, from: "#{id_name}_1i"
     select datetime.month.to_s, from: "#{id_name}_2i"

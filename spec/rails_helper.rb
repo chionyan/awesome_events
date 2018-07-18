@@ -80,4 +80,6 @@ RSpec.configure do |config|
   # @see http://api.rubyonrails.org/classes/ActiveSupport/Testing/TimeHelpers.html#method-i-travel_to
   config.include ActiveSupport::Testing::TimeHelpers
   config.after { travel_back }
+
+  config.include SystemSpecHelper
 end

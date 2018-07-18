@@ -59,8 +59,37 @@ RSpec.describe 'EventsSystem', type: :system do
         expect(page).to have_content '作成しました'
       end
 
-      it '"イベントを編集する" ボタンが表示されていること' do
+      it '"イベントを編集する"、"イベントを削除する"ボタンが表示されていること' do
         expect(page).to have_content 'イベントを編集する'
+        expect(page).to have_content 'イベントを削除する'
+      end
+
+      context '"イベントを削除する"ボタンをクリックした場合' do
+        before { click_link 'イベントを削除する' }
+
+        it '"本当に削除しますか？"のメッセージが表示される' do
+          expect(page.driver.browser.switch_to.alert.text).to eq '本当に削除しますか？'
+        end
+
+        context 'ダイアログボックスで OK ボタンをクリックした場合' do
+          before { page.driver.browser.switch_to.alert.accept }
+
+          it 'トップページに遷移すること' do
+            expect(page.current_path).to eq '/'
+          end
+
+          it '"削除しました" メッセージが表示されていること' do
+            expect(page).to have_content '削除しました'
+          end
+        end
+
+        context 'ダイアログボックスでキャンセルボタンをクリックした場合' do
+          before { page.driver.browser.switch_to.alert.dismiss }
+
+          it 'ページが遷移しないこと' do
+            expect(page.current_path).to eq "/events/#{Event.order(:created_at).last.id}"
+          end
+        end
       end
     end
   end
@@ -121,8 +150,9 @@ RSpec.describe 'EventsSystem', type: :system do
         expect(page).to have_content "#{event.start_time.strftime('%Y/%m/%d %H:%M')} - #{event.end_time.strftime('%Y/%m/%d %H:%M')}"
       end
 
-      it '"イベントを編集する"リンクが表示されないこと' do
+      it '"イベントを編集する"、"イベントを削除する"ボタンが表示されないこと' do
         expect(page).to_not have_content 'イベントを編集する'
+        expect(page).to_not have_content 'イベントを削除する'
       end
     end
   end

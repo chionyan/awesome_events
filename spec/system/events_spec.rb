@@ -97,8 +97,11 @@ RSpec.describe 'EventsSystem', type: :system do
 
   describe '未ログイン時のイベント一覧ページ' do
     let!(:event) { create(:event, owner: user) }
-    let!(:past_event) { create(:past_event) }
-    let!(:future_event) { create(:future_event) }
+    let!(:past_event) { create(:event, :past_event) }
+    let!(:future_event) { create(:event, :future_event) }
+
+    # let!(:past_event) { create(:past_event) }
+    # let!(:future_event) { create(:future_event) }
 
     before { click_link 'ログアウト' }
 

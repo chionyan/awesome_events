@@ -3,11 +3,6 @@ require 'rails_helper'
 RSpec.describe 'EventsSystem', type: :system do
   include_context 'with_log_in'
 
-  ja_name = I18n.t('activerecord.attributes.event.name')
-  ja_place = I18n.t('activerecord.attributes.event.place')
-  ja_content = I18n.t('activerecord.attributes.event.content')
-  ja_error_messages_blank = I18n.t('errors.messages.blank')
-
   before { travel_to '2018-07-07 18:30:00' }
 
   describe 'イベント作成ページ' do
@@ -26,6 +21,11 @@ RSpec.describe 'EventsSystem', type: :system do
       end
 
       it '適切なエラーメッセージが表示されること' do
+        ja_name = I18n.t('activerecord.attributes.event.name')
+        ja_place = I18n.t('activerecord.attributes.event.place')
+        ja_content = I18n.t('activerecord.attributes.event.content')
+        ja_error_messages_blank = I18n.t('errors.messages.blank')
+
         expect(page).to have_content "#{ja_name}#{ja_error_messages_blank}"
         expect(page).to have_content "#{ja_place}#{ja_error_messages_blank}"
         expect(page).to have_content "#{ja_content}#{ja_error_messages_blank}"

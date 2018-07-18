@@ -176,4 +176,22 @@ RSpec.describe 'Events', type: :request do
       end
     end
   end
+
+  describe 'DELETE #destroy' do
+    subject { delete event_path(event.id) }
+
+    let(:user) { create(:user) }
+    let!(:event) { create(:event, owner: user) }
+
+    before { get '/auth/twitter/callback' }
+
+    it 'イベントを削除すること' do
+      expect { subject }.to change(Event, :count).by(-1)
+    end
+
+    it 'トップページにリダイレクトすること' do
+      subject
+      expect(response).to redirect_to(root_path)
+    end
+  end
 end

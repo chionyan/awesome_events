@@ -100,9 +100,6 @@ RSpec.describe 'EventsSystem', type: :system do
     let!(:past_event) { create(:event, :past_event) }
     let!(:future_event) { create(:event, :future_event) }
 
-    # let!(:past_event) { create(:past_event) }
-    # let!(:future_event) { create(:future_event) }
-
     before { click_link 'ログアウト' }
 
     it '開始時間順に未開催のイベント一覧が表示されること' do

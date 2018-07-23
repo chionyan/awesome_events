@@ -1,7 +1,8 @@
 class TicketsController < ApplicationController
-  before_action :authenticate, expect: [:new]
+  before_action :authenticate
 
   def new
+    redirect_to events_path
   end
 
   def create

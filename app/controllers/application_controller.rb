@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :ticket?
 
   private
 
@@ -15,5 +15,9 @@ class ApplicationController < ActionController::Base
   def authenticate
     return if logged_in?
     redirect_to root_path, alert: 'ログインしてください'
+  end
+
+  def ticket?(event)
+    current_user.events.include?(event)
   end
 end

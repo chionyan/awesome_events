@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy', as: :logout
 
   resources :events do
-    resources :tickets
+    resources :tickets, only: [:new, :create]
   end
 end

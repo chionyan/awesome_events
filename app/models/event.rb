@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :owner, class_name: 'User'
   has_many :tickets
+  has_many :users, through: :tickets
 
   validates :name, length: { maximum: 50 }, presence: true
   validates :place, length: { maximum: 100 }, presence: true

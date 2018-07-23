@@ -13,7 +13,7 @@ RSpec.describe 'TicketsSystem', type: :system do
   describe 'イベント参加アクション' do
     before do
       click_button '参加する'
-      sleep 1
+      sleep 0.3
     end
 
     it 'イベント参加フォームが表示されること' do
@@ -23,7 +23,7 @@ RSpec.describe 'TicketsSystem', type: :system do
     context '"送信"ボタンをクリックした場合' do
       subject do
         click_button '送信'
-        sleep 1
+        sleep 0.3
       end
 
       context '有効な値を入力した場合' do
@@ -48,7 +48,7 @@ RSpec.describe 'TicketsSystem', type: :system do
     context '"キャンセル"ボタンをクリックした場合' do
       subject do
         click_button 'キャンセル'
-        sleep 1
+        sleep 0.3
       end
 
       it 'イベント参加フォームが消えること' do

@@ -1,8 +1,7 @@
 class TicketsController < ApplicationController
-  before_action :authenticate
+  before_action :authenticate, expect: [:new]
 
   def new
-    raise ActionController::RoutingError, 'ログイン状態で TicketsController#new にアクセス'
   end
 
   def create

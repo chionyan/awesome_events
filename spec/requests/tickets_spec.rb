@@ -6,13 +6,6 @@ RSpec.describe 'Tickets', type: :request do
 
   before { OmniAuth.config.mock_auth[:twitter] = log_in_as user }
 
-  describe 'GET #new' do
-    it 'トップページにリダイレクトすること' do
-      get new_event_ticket_path(event)
-      expect(response).to redirect_to(root_path)
-    end
-  end
-
   describe 'POST #create' do
     subject { post event_tickets_path(event), params: params }
 

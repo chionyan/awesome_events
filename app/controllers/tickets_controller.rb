@@ -1,10 +1,6 @@
 class TicketsController < ApplicationController
   before_action :authenticate
 
-  def new
-    redirect_to events_path
-  end
-
   def create
     ticket = current_user.tickets.build do |t|
       t.event_id = params[:event_id]

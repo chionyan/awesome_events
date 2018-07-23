@@ -23,9 +23,9 @@ RSpec.describe 'Tickets', type: :request do
     context 'params が有効なパラメータの場合' do
       let(:params) { { ticket: attributes_for(:ticket, comment: '_' * 30) } }
 
-      it 'HTTP Status 2xx が返ってくること' do
+      it 'HTTP Status 201 が返ってくること' do
         subject
-        expect(response).to be_successful
+        expect(response.status).to eq 201
       end
 
       it 'チケットを新規作成すること' do

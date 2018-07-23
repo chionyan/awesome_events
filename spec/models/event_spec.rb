@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  describe 'associetion' do
+  describe 'association' do
     it { is_expected.to belong_to(:owner) }
     it { is_expected.to have_many(:tickets) }
   end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
-  describe 'associetion' do
+  describe 'association' do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:event) }
   end

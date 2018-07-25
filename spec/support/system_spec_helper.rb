@@ -6,14 +6,4 @@ module SystemSpecHelper
     select datetime.hour.to_s.rjust(2, '0'), from: "#{id_name}_4i"
     select datetime.min.to_s.rjust(2, '0'), from: "#{id_name}_5i"
   end
-
-  RSpec.shared_context 'with_log_in' do
-    let!(:user) { create(:user) }
-
-    before do
-      OmniAuth.config.mock_auth[:twitter] = log_in_as user
-      visit '/'
-      click_link 'Twitterでログイン'
-    end
-  end
 end

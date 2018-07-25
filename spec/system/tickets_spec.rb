@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'TicketsSystem', type: :system do
-  include_context 'with_log_in'
-  before { travel_to event.start_time - 0.5.hours }
-
+  let!(:user) { create(:user) }
   let!(:event) { create(:event, owner: user) }
+
+  before do
+    travel_to '2018-07-07 18:30:00'
+    OmniAuth.config.mock_auth[:twitter] = log_in_as user
+    visit '/'
+    click_link 'Twitterでログイン'
+  end
 
   context 'ログイン済かつイベントに参加していない場合' do
     before do

@@ -46,6 +46,7 @@ RSpec.describe 'SessionsRequest', type: :request do
 
   describe 'GET #destroy' do
     subject { get '/logout' }
+
     let!(:user) { build(:user) }
 
     it 'session の user_id が nil になっているいること' do

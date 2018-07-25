@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'EventsSystem', type: :system do
-  include_context 'with_log_in'
+  let!(:user) { create(:user) }
 
-  before { travel_to '2018-07-07 18:30:00' }
+  before do
+    travel_to '2018-07-07 18:30:00'
+    OmniAuth.config.mock_auth[:twitter] = log_in_as user
+    visit '/'
+    click_link 'Twitterでログイン'
+  end
 
   describe 'イベント作成ページ' do
     before { click_link 'イベントを作る' }

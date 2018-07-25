@@ -242,6 +242,12 @@ Rails/FilePath:
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 
+# ステータスコードを番号で記述するため
+#
+# @see https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/HttpStatus
+Rails/HttpStatus:
+  Enabled: false
+
 # やんごとなき理由からバリデーションを回避することはよくあるので無効にする。
 #
 # @see http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Rails/SkipsModelValidations

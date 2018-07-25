@@ -9,8 +9,6 @@ RSpec.describe 'Tickets', type: :request do
   describe 'POST #create' do
     subject { post event_tickets_path(event), params: params }
 
-    let(:ticket) { build(:ticket, user: user, event: event) }
-
     before { get '/auth/twitter/callback' }
 
     context 'params が有効なパラメータの場合' do

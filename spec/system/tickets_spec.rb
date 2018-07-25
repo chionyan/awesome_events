@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'TicketsSystem', type: :system do
   include_context 'with_log_in'
-  include_context 'with_event_create'
-  include_context 'with_before_event_start_time'
+  before { travel_to event.start_time - 0.5.hours }
+
+  let!(:event) { create(:event, owner: user) }
 
   context 'ログイン済かつイベントに参加していない場合' do
     before do

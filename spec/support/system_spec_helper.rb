@@ -16,12 +16,4 @@ module SystemSpecHelper
       click_link 'Twitterでログイン'
     end
   end
-
-  RSpec.shared_context 'with_event_create' do
-    let!(:event) { create(:event, owner: user) }
-  end
-
-  RSpec.shared_context 'with_before_event_start_time' do
-    before { travel_to event.start_time - 0.5.hours }
-  end
 end

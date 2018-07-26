@@ -106,7 +106,7 @@ RSpec.describe 'TicketsSystem', type: :system do
     end
 
     it '参加順に参加者一覧が表示されること' do
-      list_group_item = page.all(:xpath, '/html/body/div/div[2]/div[2]/div/div[2]/ul/li')
+      list_group_item = page.all(:css, 'div.card-body > ul > li')
 
       expect(list_group_item[0].text).to include user.nickname
       expect(list_group_item[0].text).to include ticket.comment

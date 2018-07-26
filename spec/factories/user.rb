@@ -6,7 +6,7 @@ FactoryBot.define do
     image_url 'http://example.com/netwillnet.jpg'
 
     trait :user_2 do
-      sequence(:uid, 23456) { |n| "#{n}" }
+      sequence(:uid) { |n| "#{n}" }
       nickname 'netwillnet_2'
       image_url 'http://example.com/netwillnet_2.jpg'
     end

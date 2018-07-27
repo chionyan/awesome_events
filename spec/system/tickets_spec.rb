@@ -78,8 +78,27 @@ RSpec.describe 'TicketsSystem', type: :system do
       click_link event.name
     end
 
-    it '"参加登録済み"ボタンが表示されること' do
-      expect(page).to have_content '参加登録済み'
+    it '"参加をキャンセルする"リンクが表示されること' do
+      expect(page).to have_content '参加をキャンセルする'
+    end
+
+    describe '"参加をキャンセルする"リンクをクリックした場合' do
+      before { click_link '参加をキャンセルする' }
+
+      it '"このイベントの参加をキャンセルしました"メッセージが表示されること' do
+        expect(page).to have_content 'このイベントの参加をキャンセルしました'
+      end
+
+      it '"参加する"リンクが表示されること' do
+        expect(page).to have_content '参加する'
+      end
+
+      it '参加者一覧にログインユーザが表示されないこと' do
+        list_group = page.find(:css, 'div.card-body > ul')
+
+        expect(list_group.text).to_not have_content user.nickname
+        expect(list_group.text).to_not have_content ticket.comment
+      end
     end
   end
 

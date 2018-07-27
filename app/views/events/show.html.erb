@@ -7,7 +7,7 @@
     <div class="card">
       <div class="card-header">主催者</div>
       <div class="card-body">
-        <%= link_to("https://twitter.com/#{@event.owner.nickname}") do %>
+        <%= link_to(url_for_twitter(@event.owner)) do %>
           <%= image_tag @event.owner.image_url %>
           <%= "@#{@event.owner.nickname}" %>
         <% end %>
@@ -73,5 +73,23 @@
     <% else %>
     <button class="btn btn-light btn-lg btn-block" disabled="disabled">参加するにはログインしてください</button>
     <% end %>
+
+    <hr>
+    <div class="card">
+      <div class="card-header">参加者</div>
+      <div class="card-body">
+        <ul class="list-unstyled">
+        <% @tickets.each do |ticket| %>
+        <li>
+          <%= link_to(url_for_twitter(ticket.user)) do %>
+            <%= image_tag ticket.user.image_url, width: 20, height: 20 %>
+            <%= "@#{ticket.user.nickname}" %>
+          <% end %>
+          <%= ticket.comment %>
+        </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

@@ -94,4 +94,24 @@ RSpec.describe 'TicketsSystem', type: :system do
       expect(page).to have_content '参加するにはログインしてください'
     end
   end
+
+  context '参加者一覧表示機能' do
+    let!(:user_2) { create(:user, :user_2) }
+    let!(:ticket) { create(:ticket, user: user, event: event) }
+    let!(:ticket_2) { create(:ticket, :ticket_2, user: user_2, event: event) }
+
+    before do
+      click_link 'AwesomeEvents'
+      click_link event.name
+    end
+
+    it '参加順に参加者一覧が表示されること' do
+      list_group_item = page.all(:css, 'div.card-body > ul > li')
+
+      expect(list_group_item[0].text).to include user.nickname
+      expect(list_group_item[0].text).to include ticket.comment
+      expect(list_group_item[1].text).to include user_2.nickname
+      expect(list_group_item[1].text).to include ticket_2.comment
+    end
+  end
 end

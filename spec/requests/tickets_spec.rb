@@ -46,4 +46,21 @@ RSpec.describe 'Tickets', type: :request do
       end
     end
   end
+
+  describe 'DELETE #destroy' do
+    subject { delete event_ticket_path(event, ticket) }
+
+    let!(:ticket) { create(:ticket, user: user, event: event) }
+
+    before { get '/auth/twitter/callback' }
+
+    it 'チケットを削除すること' do
+      expect { subject }.to change(Ticket, :count).by(-1)
+    end
+
+    it 'イベント詳細ページにリダイレクトすること' do
+      subject
+      expect(response).to redirect_to(event_path(event.id))
+    end
+  end
 end

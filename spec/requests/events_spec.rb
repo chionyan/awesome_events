@@ -182,11 +182,16 @@ RSpec.describe 'Events', type: :request do
 
     let(:user) { create(:user) }
     let!(:event) { create(:event, owner: user) }
+    let!(:ticket) { create(:ticket, user: user, event: event) }
 
     before { get '/auth/twitter/callback' }
 
     it 'イベントを削除すること' do
       expect { subject }.to change(Event, :count).by(-1)
+    end
+
+    it '関連するチケットを削除すること' do
+      expect { subject }.to change(Ticket, :count).by(-1)
     end
 
     it 'トップページにリダイレクトすること' do

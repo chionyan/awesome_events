@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Event, type: :model do
   describe 'association' do
     it { is_expected.to belong_to(:owner) }
-    it { is_expected.to have_many(:tickets) }
+    it { is_expected.to have_many(:tickets).dependent(:destroy) }
     it { is_expected.to have_many(:users) }
   end
 

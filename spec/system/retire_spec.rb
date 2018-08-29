@@ -16,7 +16,7 @@ RSpec.describe 'RetireSystem', type: :system do
     expect(page).to have_content '退会'
   end
 
-  context '”退会"ボタンを押した時' do
+  describe '”退会"ボタンを押した時' do
     before { click_link '退会' }
 
     it '正しくページが表示されること' do
@@ -24,6 +24,21 @@ RSpec.describe 'RetireSystem', type: :system do
         expect(page).to have_content '退会の確認'
         expect(page).to have_link '退会する'
       end
+    end
+  end
+
+  describe '”退会する"ボタンを押した時' do
+    before do
+      click_link '退会'
+      click_link '退会する'
+    end
+
+    it 'トップページに遷移すること' do
+      expect(page.current_path).to eq '/'
+    end
+
+    it '"退会完了しました" メッセージが表示されていること' do
+      expect(page).to have_content '退会完了しました'
     end
   end
 end

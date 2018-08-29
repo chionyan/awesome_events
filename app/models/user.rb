@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_destroy :check_all_events_finished
+
   has_many :created_events, class_name: 'Event', foreign_key: :owner_id, dependent: :nullify
   has_many :tickets
   has_many :events, through: :tickets
@@ -14,5 +16,14 @@ class User < ApplicationRecord
       user.nickname = nickname
       user.image_url = image_url
     end
+  end
+
+  private
+
+  def check_all_events_finished
+    now = Time.zone.now
+    errors[:base] << '公開中の未終了イベントが存在します。' if created_events.where(':now < end_time', now: now).exists?
+    errors[:base] << '未終了の参加イベントが存在します。' if participating_events.where(':now < end_time', now: now).exists?
+    errors.blank?
   end
 end

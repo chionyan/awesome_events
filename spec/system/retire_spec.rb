@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'RetireSystem', type: :system do
   let!(:user) { create(:user) }
-  let!(:event) { create(:event, owner: user) }
+  let!(:other_user) { create(:user, :user_2) }
 
   before do
     travel_to '2018-07-07 18:30:00'
@@ -28,17 +28,39 @@ RSpec.describe 'RetireSystem', type: :system do
   end
 
   describe '”退会する"ボタンを押した時' do
-    before do
-      click_link '退会'
-      click_link '退会する'
+    subject { click_link '退会する' }
+
+    before { click_link '退会' }
+
+    context '公開中の未終了イベントも未終了の参加イベントもない場合' do
+      it 'トップページに遷移すること' do
+        subject
+        expect(page.current_path).to eq '/'
+      end
+
+      it '"退会完了しました" メッセージが表示されていること' do
+        subject
+        expect(page).to have_content '退会完了しました'
+      end
     end
 
-    it 'トップページに遷移すること' do
-      expect(page.current_path).to eq '/'
+    context '公開中の未終了イベントがある場合' do
+      let!(:future_event) { create(:event, :future_event, owner: user) }
+
+      it '"公開中の未終了イベントが存在します。" メッセージが表示されていること' do
+        subject
+        expect(page).to have_content '公開中の未終了イベントが存在します。'
+      end
     end
 
-    it '"退会完了しました" メッセージが表示されていること' do
-      expect(page).to have_content '退会完了しました'
+    context '未終了の参加イベントがある場合' do
+      let!(:future_event) { create(:event, :future_event, owner: other_user) }
+      let!(:ticket) { create(:ticket, user: user, event: future_event) }
+
+      it '"未終了の参加イベントが存在します。" メッセージが表示されていること' do
+        subject
+        expect(page).to have_content '未終了の参加イベントが存在します。'
+      end
     end
   end
 end

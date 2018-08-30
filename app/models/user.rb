@@ -2,8 +2,8 @@ class User < ApplicationRecord
   before_destroy :check_all_events_finished
 
   has_many :created_events, class_name: 'Event', foreign_key: :owner_id, dependent: :nullify
-  has_many :tickets
-  has_many :events, through: :tickets
+  has_many :tickets, dependent: :nullify
+  has_many :events, through: :tickets, dependent: :nullify
   has_many :participating_events, through: :tickets, source: :event, dependent: :nullify
 
   def self.find_or_create_from_auth_hash(auth_hash)

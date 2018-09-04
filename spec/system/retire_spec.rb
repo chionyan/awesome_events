@@ -5,7 +5,6 @@ RSpec.describe 'RetireSystem', type: :system do
   let!(:other_user) { create(:user, :user_2) }
 
   before do
-    travel_to '2018-07-07 18:30:00'
     OmniAuth.config.mock_auth[:twitter] = log_in_as user
     visit '/'
     click_link 'Twitterでログイン'
@@ -17,7 +16,10 @@ RSpec.describe 'RetireSystem', type: :system do
   end
 
   describe '”退会"ボタンを押した時' do
-    before { click_link '退会' }
+    before do
+      travel_to '2018-07-07 18:30:00'
+      click_link '退会'
+    end
 
     it '正しくページが表示されること' do
       aggregate_failures do
@@ -30,7 +32,10 @@ RSpec.describe 'RetireSystem', type: :system do
   describe '”退会する"ボタンを押した時' do
     subject { click_link '退会する' }
 
-    before { click_link '退会' }
+    before do
+      travel_to '2018-07-07 18:30:00'
+      click_link '退会'
+    end
 
     context '公開中の未終了イベントも未終了の参加イベントもない場合' do
       it 'トップページに遷移すること' do

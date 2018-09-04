@@ -69,19 +69,15 @@ RSpec.describe 'RetireSystem', type: :system do
     end
   end
 
-  describe 'ユーザが退会した時' do
-    subject do
-      travel_to '2018-07-07 17:00:00'
-      click_link 'AwesomeEvents'
-      click_link past_event.name
-    end
+  describe 'ユーザが退会後、イベント詳細ページを閲覧した時' do
+    subject { visit "/events/#{past_event.id}" }
 
     before do
       travel_to '2018-07-07 23:00:00'
       click_link '退会'
     end
 
-    context '主催者が退会した場合' do
+    context 'イベント主催者が退会した場合' do
       let!(:past_event) { create(:event, :past_event, owner: user) }
 
       before { click_link '退会する' }
@@ -93,7 +89,7 @@ RSpec.describe 'RetireSystem', type: :system do
       end
     end
 
-    context '参加者が退会した場合' do
+    context 'イベント参加者が退会した場合' do
       let!(:past_event) { create(:event, :past_event, owner: other_user) }
       let!(:ticket) { create(:ticket, user: user, event: past_event) }
 
